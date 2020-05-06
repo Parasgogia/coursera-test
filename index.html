@@ -1,11 +1,212 @@
-<html>
+<!--
+<!DOCTYPE html>
+<html ng-app='MyFirstApp'>
+
 <head>
-    <title></title>
+  <meta charset="utf-8">
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    body {
+      font-size: 1.5em;
+    }
+  </style>
+  <title> My First angular App</title>
 </head>
+
 <body>
-    <h1>This Is First HtmlPage Paras Gogia</h1>
+  <h1>My First angular app</h1>
+
+  <div ng-controller='MyFirstController'>
+     {{sayhello()}} &nbsp;{{name}}  &nbsp; 
+     <input type="text"  ng-model='name'>
+     Inside My Name is: {{name}}
+  </div>
 </body>
 
+</html>
+-->
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>body { font-size: 1.3em; }</style>
+    <title>Name Calculator</title>
+  </head>
+  <body ng-app="NameCalculator">
+    <h1>Name Calculator</h1>
+    <div ng-controller="NameCalculatorController">
+      <div>
+        Your name:
+        <input type="text"
+          ng-model="name"
+          ng-keyup="displayNumeric();">
+      </div>
+      <div>Total Numeric value of person's name is: {{totalValue}}</div>
+    </div>
+  </body>
+</html>
+
+-->
+
+<!--Dependancy Injection-->
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>body { font-size: 1.3em; }</style>
+    <title>--Dependancy Injection--</title>
+  </head>
+<body ng-app='DiApp'>
+  <center>
+  <div ng-controller='DiController'>
+    <input type="text" ng-model='name' ng-blur='upper();'>
+    <h2>{{name | uppercase}} Likes To Eat Healthy Snacks
+    <br>
+    
+    </h2>
+  
+  <div >
+    <button ng-click='feedParas()'>Feed Paras</button>
+    Cost: {{cookie | currency : 'Rs' : 4}}
+    <br>
+    <img ng-src='images/{{stateOfBeing}}.png'>
+  </div>
+
+</div>
+</center>
+</body>
+</html>
+ -->
+
+ <!--Custom filters-->
+<!--
+ <!DOCTYPE html>
+<html ng-app='MsgApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style> body { font-size: 1.2em; }</style>
+    <title>Custom Filters</title>
+  </head>
+  <body>
+    <h1>Custom Filters</h1>
+    <div ng-controller='MsgController'>
+      Original: {{sayMessage()}} <br>
+      Loves: {{ sayLovesMessage() }} <br>
+      Truth: {{ sayLovesMessage() | truth : 'healthy' : 'cookie' }} <br>
+      BIG TRUTH: {{ sayLovesMessage() | truth : 'healthy' : 'cookie' | uppercase }}
+      <div>
+        <button ng-click="feedYaakov()">Feed Yaakov</button>
+        <br>
+
+        <img ng-src="images/{{stateOfBeing}}.png">
+      </div>
+    </div>
+  </body>
+</html>
+
+-->
 
 
+<!--  $digest and $apply 
+<!DOCTYPE html>
+<html ng-app='CounterApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style> body { font-size: 1.2em; }</style>
+    <title>The Digest Cycle</title>
+  </head>
+  <body>
+    <h1>The Digest Cycle</h1>
+    <div ng-controller='CounterController'>
+      <div>
+        <button ng-click="upCounter()">Increment Counter</button>
+      </div>
+      <div>
+        Regular counter: {{ counter }}
+      </div>
+    </div>
+  </body>
+</html>
+
+
+-->
+
+
+<!-- 2-way 1-way 1-time bounding -->
+<!--
+<!DOCTYPE html>
+<html ng-app='BindingApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style> body { font-size: 1.2em; }</style>
+    <title>2-way, 1-way, and 1-time binding</title>
+  </head>
+  <body>
+    <h1>2-way, 1-way, and 1-time binding</h1>
+    <div ng-controller='BindingController'>
+
+      <button ng-click="setFullName()">Set Full Name</button><br>
+
+      Full name is: {{ :: fullName }} <br>
+      <button ng-click="logFirstName()">Log First Name</button><br>
+      <button ng-click="logFullName()">Log Full Name</button><br>
+
+      <div>
+        <input type="text" ng-model="firstName">
+      </div>
+    </div>
+  </body>
+</html>
+-->
+
+<!-- ng-repeat -->
+<!DOCTYPE html>
+<html ng-app='ShoppingListApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style> body { font-size: 1.2em; }</style>
+    <title>ng-repeat</title>
+  </head>
+  <body>
+    <h1>ng-repeat</h1>
+    <div ng-controller='ShoppingListController'>
+      <!-- Shopping List #1: -->
+     <!-- <h3>Shopping List:</h3>
+       <ul>
+        <li ng-repeat="item in shoppingList1">{{ item }}</li>
+      </ul> -->
+
+      <!-- Shopping List #2: -->
+      <!-- <ul>
+        <li ng-repeat="item in shoppingList2">Buy {{item.quantity}} of {{item.name}}(s)</li>
+      </ul>  -->
+
+      <!-- Shopping List #3: -->
+
+      <input type="text" ng-model="shoppingList2[0].quantity">
+      <input type="text" ng-model="search">
+      <ul>
+        <li ng-repeat="item in shoppingList2 | filter : search">{{$index + 1}}. Buy {{item.quantity}} of {{item.name}}(s)</li>
+      </ul>
+      <input type="text" ng-model="newItemName" placeholder="item name">
+      <input type="text" ng-model="newItemQuantity" placeholder="item quantity">
+      <button ng-click="addToList()">Add To List</button> 
+
+    </div>
+  </body>
 </html>

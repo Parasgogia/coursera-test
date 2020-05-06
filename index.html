@@ -173,6 +173,7 @@
 -->
 
 <!-- ng-repeat -->
+<!--
 <!DOCTYPE html>
 <html ng-app='ShoppingListApp'>
   <head>
@@ -184,7 +185,7 @@
   </head>
   <body>
     <h1>ng-repeat</h1>
-    <div ng-controller='ShoppingListController'>
+    <div ng-controller='ShoppingListController'>-->
       <!-- Shopping List #1: -->
      <!-- <h3>Shopping List:</h3>
        <ul>
@@ -196,9 +197,9 @@
         <li ng-repeat="item in shoppingList2">Buy {{item.quantity}} of {{item.name}}(s)</li>
       </ul>  -->
 
-      <!-- Shopping List #3: -->
-
-      <input type="text" ng-model="shoppingList2[0].quantity">
+      <!--Shopping List #3: -->
+<!--
+     <input type="text" ng-model="shoppingList2[0].quantity">
       <input type="text" ng-model="search">
       <ul>
         <li ng-repeat="item in shoppingList2 | filter : search">{{$index + 1}}. Buy {{item.quantity}} of {{item.name}}(s)</li>
@@ -209,4 +210,40 @@
 
     </div>
   </body>
+</html>-->
+<!doctype html>
+<html lang="en" ng-app='LunchCheck'>
+  <head>
+    <title>Lunch Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      .message { font-size: 1.3em; font-weight: bold; 
+      }
+      .hell{
+        color:steelblue;
+      }
+    </style>
+  </head>
+<body >
+   <div class="container" ng-controller='LunchBox'>
+     <h1>Lunch Checker</h1>
+
+         <div class="form-group">
+             <input id="lunch-menu" type="text"
+             placeholder="list comma separated dishes you usually have for lunch "
+             class="form-control" ng-model='name'>
+         </div>
+         <div class="form-group">
+             <button ng-click='LuchCheckBox();' class="btn btn-default">Check If Too Much</button>
+         </div>
+         <div class="form-group message" ng-model='message'>
+           <!-- Your message can go here. -->
+           <h3 class='hell'> {{message | uppercase}} </h3>
+         </div>
+   </div>
+
+</body>
 </html>

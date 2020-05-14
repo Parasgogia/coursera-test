@@ -1,0 +1,199 @@
+  <!--
+<!DOCTYPE html>
+<html ng-app='ShoppingListPromiseApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Shopping List with a Promise</title>
+  </head>
+  <body>
+    <h1>Shopping List with a Promise</h1>
+
+    <div ng-controller='ShoppingListController as list'>
+      <h3>Shopping List</h3>
+      <input type="text" ng-model="list.itemName" placeholder="item name">
+      <input type="text" ng-model="list.itemQuantity" placeholder="quantity"> boxes
+      <button ng-click="list.addItem();">Add Item</button>
+        {{service.result.message}}
+      <ol>
+        <li ng-repeat="item in list.items">
+          {{ item.quantity }} boxes of {{ item.name }}
+          <button ng-click="list.removeItem($index);">Remove Item</button>
+        
+        </li>
+          <div>{{deffered.result.message}}</div>
+      </ol>
+    
+    </div>
+
+  </body>
+</html>
+-->
+
+<!--Lec 25-->
+
+<!DOCTYPE html>
+<html ng-app='MenuCategoriesApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Using $http Service</title>
+  </head>
+  <body>
+    <h1>Using $http Service</h1>
+
+    <div ng-controller='MenuCategoriesController as menu'>
+      <h3>List of Menu Categories</h3>
+      <ul>
+        <li ng-repeat="category in menu.categories">
+          (<a href="" ng-click="menu.logMenuItems(category.short_name);">{{ category.short_name }}</a>)
+          {{ category.name }}
+        </li>
+      </ul>
+    </div>
+
+  </body>
+</html>
+-->
+
+<!-- Lec 27 -->
+<!-- Custom Directive -->
+<!--
+
+<!DOCTYPE html>
+<html ng-app='ShoppingListDirectiveApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Directives with 'restrict'</title>
+  </head>
+  <body>
+    <h1>Directives with 'restrict'</h1>
+
+    LIST #1 - unlimited items 
+    <div id="list1" ng-controller='ShoppingListController1 as list1'>
+     
+      <input type="text" ng-model="list1.itemName" placeholder="item name">
+      <input type="text" ng-model="list1.itemQuantity" placeholder="quantity">
+      <button ng-click="list1.addItem();">Add Item</button>
+      <ol>
+        <list-item  title='{{list1.title}}'></list-item>
+         <list-item my-list='list1'  ng-repeat="item in list1.items"></list-item> 
+      </ol>
+      <div ng-if="list1.errorMessage" class="error">Error: {{list1.errorMessage}}</div>
+    </div>
+
+    <! LIST #2 (limited to 3 items) -
+    <div id="list2" ng-controller='ShoppingListController2 as list2'>
+      <h3>Shopping List #2 (limited to 3 items)</h3>
+      <input type="text" ng-model="list2.itemName" placeholder="item name">
+      <input type="text" ng-model="list2.itemQuantity" placeholder="quantity">
+      <button ng-click="list2.addItem();">Add Item</button>
+      <ol>
+        <list-item my-list='list2' ng-repeat="item in list2.items"></list-item>
+      </ol>
+      <div ng-if="list2.errorMessage" class="error">Error: {{list2.errorMessage}}</div>
+    </div>
+
+  </body>
+</html>
+-->
+
+
+<!--using Controllers in Directives-->
+<!--
+<!DOCTYPE html>
+<html ng-app='ShoppingListDirectiveApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Directives with Their Own Controllers</title>
+  </head>
+  <body>
+    <h1>Directives with Their Own Controllers</h1>
+
+ 
+    <div id="list" ng-controller='ShoppingListController as list'>
+      <input type="text" ng-model="list.itemName" placeholder="item name">
+      <input type="text" ng-model="list.itemQuantity" placeholder="quantity">
+      <button ng-click="list.addItem();">Add Item</button>
+
+      <shopping-list items="list.items" title="{{list.title}}"></shopping-list>
+
+    </div>
+
+  </body>
+</html>
+-->
+
+<!--Lecture 30-->
+<!--
+<!DOCTYPE html>
+<html ng-app='ShoppingListDirectiveApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Directives with Isolate Scope and '&'</title>
+  </head>
+  <body>
+    <h1>Directives with Isolate Scope and '&'</h1>
+
+
+    <div id="list" ng-controller='ShoppingListController as list'>
+      <input type="text" ng-model="list.itemName" placeholder="item name">
+      <input type="text" ng-model="list.itemQuantity" placeholder="quantity">
+      <button ng-click="list.addItem();">Add Item</button>
+      <span>{{ list.lastRemoved }}</span>
+
+      <shopping-list
+        items="list.items"
+        title="{{list.title}}"
+        bad-remove="list.removeItem"
+        on-remove="list.removeItem(index)"></shopping-list>
+
+    </div>
+
+  </body>
+</html>
+-->
+
+<!--
+<!DOCTYPE html>
+<html ng-app='ShoppingListDirectiveApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Directives: Manipulating the DOM with link()</title>
+  </head>
+  <body>
+    <h1>Directives: Manipulating the DOM with link()</h1>
+
+  
+    <div id="list" ng-controller='ShoppingListController as list'>
+      <input type="text" ng-model="list.itemName" placeholder="item name">
+      <input type="text" ng-model="list.itemQuantity" placeholder="quantity">
+      <button ng-click="list.addItem();">Add Item</button>
+      <span>{{list.lastRemoved}}</span>
+
+      <shopping-list
+        items="list.items"
+        title="{{list.title}}"
+        on-remove="list.removeItem(index)"></shopping-list>
+    </div>
+
+  </body>
+</html>
+-->

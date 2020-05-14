@@ -13,7 +13,7 @@
   });
 
 })();
-*/
+
 
 // Name Calculator
 
@@ -67,14 +67,23 @@
         $scope.stateOfBeing='feed';
         $scope.name="I am Full!"
       };
-    };
+    };`
+
+
+
+
+    // Week 2
+
+
+
 
     //Custom filter
 
     
    
   })();
-  
+  */
+/*
  (function () {
   'use strict';
   
@@ -120,8 +129,8 @@
   }
   
   })();
-
- 
+*/
+ /*
 
  (function () {
   'use strict';
@@ -171,7 +180,8 @@
 
   })();
 
-  
+  // ng-repeat
+
 
   (function(){
     'user strict';
@@ -180,7 +190,7 @@
 
     .controller('ShoppingListController' , ShoppingListController);
 
-    ShoppingListController.inject = ['$scope'];
+    ShoppingListController.$inject = ['$scope'];
 
     var shoppingList1 = [
       "Milk", "Donuts", "Cookies", "Chocolate", "Peanut Butter", "Pepto Bismol", "Pepto Bismol (Chocolate flavor)", "Pepto Bismol (Cookie flavor)"
@@ -295,19 +305,19 @@ function ChildController1($scope) {
 
    console.log("$scope.parentValue: ", $scope.parentValue);
    console.log("CHILD $scope: ", $scope);
-  //
-  // $scope.parentValue = 5;
-  // console.log("*** CHANGED: $scope.parentValue = 5 ***");
-  // console.log("$scope.parentValue: ", $scope.parentValue);
-  // console.log($scope);
-  //
-  // console.log("$scope.pc.parentValue: ", $scope.pc.parentValue);
-  // $scope.pc.parentValue = 5;
-  // console.log("** CHANGED: $scope.pc.parentValue = 5; ***");
-  // console.log("$scope.pc.parentValue: ", $scope.pc.parentValue);
-  // console.log("$scope: ", $scope);
-  //
-  // console.log("$scope.$parent.parentValue: ", $scope.$parent.parentValue);
+  
+  $scope.parentValue = 5;
+  console.log("*** CHANGED: $scope.parentValue = 5 ***");
+  console.log("$scope.parentValue: ", $scope.parentValue);
+  console.log($scope);
+  
+  console.log("$scope.pc.parentValue: ", $scope.pc.parentValue);
+  $scope.pc.parentValue = 5;
+  console.log("** CHANGED: $scope.pc.parentValue = 5; ***");
+  console.log("$scope.pc.parentValue: ", $scope.pc.parentValue);
+  console.log("$scope: ", $scope);
+  
+  console.log("$scope.$parent.parentValue: ", $scope.$parent.parentValue);
 }
 
 // ** Controller As syntax
@@ -326,8 +336,8 @@ function ChildController2($scope) {
 
 })();
 
-
-
+*/
+/*
 (function () {
   'use strict';
   
@@ -386,8 +396,9 @@ function ChildController2($scope) {
   
   })();
 
-  
+  */
 
+  /*
  (function () {
   'use strict';
   
@@ -487,7 +498,92 @@ function ChildController2($scope) {
   }
   
   })();
-  
   */
+
+/*
+ (function () {
+  'use strict';
+  
+  angular.module('ShoppingListApp', [])
+  .controller('ShoppingListController', ShoppingListController)
+  .provider('ShoppingListService', ShoppingListServiceProvider)
+  .config(Config);
+  
+  Config.$inject = ['ShoppingListServiceProvider'];
+  function Config(ShoppingListServiceProvider) {
+    // Save Yaakov from himself
+    ShoppingListServiceProvider.defaults.maxItems = 2;
+  }
+  
+  
+  ShoppingListController.$inject = ['ShoppingListService'];
+  function ShoppingListController(ShoppingListService) {
+    var list = this;
+  
+    list.items = ShoppingListService.getItems();
+  
+    list.itemName = "";
+    list.itemQuantity = "";
+  
+    list.addItem = function () {
+      try {
+        ShoppingListService.addItem(list.itemName, list.itemQuantity);
+      } catch (error) {
+        list.errorMessage = error.message;
+      }
+    };
+  
+    list.removeItem = function (itemIndex) {
+      ShoppingListService.removeItem(itemIndex);
+    };
+  }
+  
+  
+  // If not specified, maxItems assumed unlimited
+  function ShoppingListService(maxItems) {
+    var service = this;
+  
+    // List of shopping items
+    var items = [];
+  
+    service.addItem = function (itemName, quantity) {
+      if ((maxItems === undefined) ||
+          (maxItems !== undefined) && (items.length < maxItems)) {
+        var item = {
+          name: itemName,
+          quantity: quantity
+        };
+        items.push(item);
+      }
+      else {
+        throw new Error("Max items (" + maxItems + ") reached.");
+      }
+    };
+  
+    service.removeItem = function (itemIndex) {
+      items.splice(itemIndex, 1);
+    };
+  
+    service.getItems = function () {
+      return items;
+    };
+  }
+  
+  
+  function ShoppingListServiceProvider() {
+    var provider = this;
+  
+    provider.defaults = {
+      maxItems: 10
+    };
+  
+    provider.$get = function () {
+      var shoppingList = new ShoppingListService(provider.defaults.maxItems);
+  
+      return shoppingList;
+    };
+  }
+  
+  })();
 
   
